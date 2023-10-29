@@ -1,13 +1,10 @@
 // Create web server
-// Express
+
 const express = require('express');
 const router = express.Router();
 
-// Model
 const Comment = require('../models/comment');
 
-// Routes
-// Get all comments
 router.get('/', (req, res) => {
     Comment.find({}, (err, comments) => {
         if (err) {
@@ -18,7 +15,6 @@ router.get('/', (req, res) => {
     });
 });
 
-// Get comment by id
 router.get('/:id', (req, res) => {
     Comment.findById(req.params.id, (err, comment) => {
         if (err) {
@@ -29,7 +25,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// Create comment
 router.post('/', (req, res) => {
     let comment = new Comment(req.body);
     comment.save()
@@ -41,7 +36,6 @@ router.post('/', (req, res) => {
         });
 });
 
-// Update comment
 router.put('/:id', (req, res) => {
     Comment.findById(req.params.id, (err, comment) => {
         if (!comment) {
@@ -59,7 +53,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-// Delete comment
+
 router.delete('/:id', (req, res) => {
     Comment.findByIdAndRemove(req.params.id, (err, comment) => {
         if (err) {
@@ -70,5 +64,5 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-// Export router
+
 module.exports = router;
